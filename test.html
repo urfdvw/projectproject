@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p>Click the button to make a new page with text.</p>
+    <input id="inputText">
+    <button onclick="newWindow()">New window</button>
+    <button onclick="visit()">Enter</button>
+
+    <script>
+        var myNewWindow 
+
+        function newWindow() {
+            myNewWindow = window.open();
+        }
+
+        function visit() {
+            var text = document.getElementById("inputText").value;
+            var domain = "https://www.instantbible.org/#/bible/version/esv/book/1Co/chapter/";
+            var url = domain + text;
+            console.log(url)
+            myNewWindow.location.replace(url);
+            // not sure why, but visit twice will make navigation to the 
+            // specific verse easier
+            myNewWindow.location.replace(url);
+        }
+    </script>
+
+</body>
+
+</html>
