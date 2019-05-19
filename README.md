@@ -55,3 +55,26 @@
 - 检索书名
     - 阶段一，用下拉表单先凑活一下
     - 阶段二，用horsey库实现联想的功能
+
+## 实施
+
+### 投影显示
+- 打开一个新的窗口, t01t02, [link](https://www.w3schools.com/jsref/met_win_open.asp)
+
+用instantbible.org显示经文
+- 跳转到某网址, t02, [link](https://stackoverflow.com/a/506004)
+- 延迟执行某项命令, t02, [link](https://www.w3schools.com/jsref/met_win_settimeout.asp)
+- split a string by regrex, t02, [link](https://stackoverflow.com/a/10346754)
+
+从数据库调圣经出来
+- 在窗口中加入内容, t01, [link](https://www.w3schools.com/jsref/met_document_createelement.asp)
+- 清理屏幕, t01, [link](https://stackoverflow.com/a/9967560)
+
+### 检索书名
+数据预备。
+如果不把圣经数据放在app里面的话，数据就只有书名，没有必要还从后台调数据。
+最简单的把数据放在前端的方式，就是在代码中直接加入[json](https://www.w3schools.com/js/js_json.asp)
+
+将CSV转换为JSON，python code
+- read csv as utf8 [link](https://stackoverflow.com/a/14786752)
+- dump json as utf8 [link](https://stackoverflow.com/a/18337754)

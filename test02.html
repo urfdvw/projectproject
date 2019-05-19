@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <p>Click the button to make a new page with text.</p>
+    <input id="inputText">
+    <button onclick="newWindow()">New window</button>
+    <button onclick="visit()">Enter</button>
+
+    <script>
+        var myNewWindow
+        var data = $.csv.toObjects("books.csv");
+        console.log(data)
+        function newWindow() {
+            myNewWindow = window.open("https://www.instantbible.org", menubar=0);
+        }
+
+        function visit() {
+            var text = document.getElementById("inputText").value;
+            var words = text.split(/[ ,]+/);
+            var domain = "https://www.instantbible.org/#/bible/version/esv/book/1Co/chapter/";
+            var urlChapter = domain + words[0];
+            myNewWindow.location.replace(urlChapter);
+            var urlVerse = domain + words[0] + '#' + words[1];
+            setTimeout(function(){ myNewWindow.location.replace(urlVerse); }, 1500);
+        }
+    </script>
+
+</body>
+
+</html>
