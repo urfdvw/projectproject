@@ -82,3 +82,7 @@
 将CSV转换为JSON，python code
 - read csv as utf8 [link](https://stackoverflow.com/a/14786752)
 - dump json as utf8 [link](https://stackoverflow.com/a/18337754)
+
+read JSON into a page, t03
+- side load js script [link](https://www.w3schools.com/js/js_whereto.asp)
+- JSON can be used as dictionary [link](https://www.w3schools.com/js/js_json_objects.asp)
