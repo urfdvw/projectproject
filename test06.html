@@ -2,14 +2,16 @@
 <html>
 
 <body>
-    <button onclick="newWindow()">Create a new page</button>
-    <pre id="info"></pre>
-
-    <input id="input" onkeyup="update()">
-    <button onclick="gotoPage()">Enter</button>
-
-    <br>
-    <pre id="candidateBookList"></pre>
+    <div id="start">
+        <button onclick="newWindow()">Create a new page</button>
+    </div>
+    <div id="UI" style="display: none;">
+        <pre id="info"></pre>
+        <input id="input" onkeyup="update()">
+        <button onclick="gotoPage()">Enter</button>
+        <br>
+        <pre id="candidateBookList"></pre>
+    </div>
 
     <script src="books.js"></script>
     <script>
@@ -18,14 +20,9 @@
         var linkKeys = Object.keys(link)
         var candidateBook = []
         var cb = "", cc = "", cv = ""
-        document.getElementById("info").innerHTML = "\n\n\n"
+        document.getElementById("info").innerHTML = "book:\nchapter:\nverse:\n"
 
-
-        function newWindow() {
-            myNewWindow = window.open("https://www.instantbible.org");
-        }
-
-        // Execute a function when the user releases a key on the keyboard
+        // Execute a function when the user hit a key on the keyboard
         document.getElementById("input").addEventListener("keydown", function (event) {
             // Number 13 is the "Enter" key on the keyboard
             if (event.keyCode === 13) {
@@ -64,28 +61,11 @@
                 }
             }
         });
-        function isInt(a) {
-            return a == parseInt(a)
-        }
 
-        function arrangeInput(text) {
-            text = text.trim()
-            var b = "", c = "", v = ""
-            var words = text.split(/[ ,]+/);
-            if (words.length > 0) {
-                if (!isInt(words[0])) {
-                    b = words[0]
-                    if (words.length == 3) {
-                        c = words[1], v = words[2]
-                    }
-                }
-                if (words.length == 3) {
-                    if (!isInt(words[2])) {
-                        b = words[2], c = words[0], v = words[1]
-                    }
-                }
-            }
-            return [b, c, v]
+        function newWindow() {
+            document.getElementById("start").style.display = "none"
+            document.getElementById("UI").style.display = "block"
+            myNewWindow = window.open("https://www.instantbible.org", "", "width=400,height=400")
         }
 
         function gotoPage() {
@@ -137,6 +117,30 @@
             infoText += 'chapter: ' + cc + "\n"
             infoText += 'verse: ' + cv + "\n"
             document.getElementById("info").innerHTML = infoText
+        }
+
+        function isInt(a) {
+            return a == parseInt(a)
+        }
+
+        function arrangeInput(text) {
+            text = text.trim()
+            var b = "", c = "", v = ""
+            var words = text.split(/[ ,]+/);
+            if (words.length > 0) {
+                if (!isInt(words[0])) {
+                    b = words[0]
+                    if (words.length == 3) {
+                        c = words[1], v = words[2]
+                    }
+                }
+                if (words.length == 3) {
+                    if (!isInt(words[2])) {
+                        b = words[2], c = words[0], v = words[1]
+                    }
+                }
+            }
+            return [b, c, v]
         }
 
         function findBooks(text) {
