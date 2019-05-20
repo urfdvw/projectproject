@@ -98,3 +98,5 @@ read JSON into a page, t03
 部分基本完备，开始搭建
 - return multiple values [link](https://stackoverflow.com/a/2917186)
 - [toString](https://www.w3schools.com/jsref/jsref_tostring_number.asp)
+- [all to lower case](https://www.quora.com/How-do-you-convert-a-string-to-lowercase-in-JavaScript)
+- [replace](https://www.w3schools.com/jsref/jsref_replace.asp)

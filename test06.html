@@ -2,9 +2,11 @@
 <html>
 
 <body>
-    <input id="input" onkeyup="listUpdate()">
+    <pre id="info"></pre>
 
+    <input id="input" onkeyup="update()">
     <button onclick="gotoPage()">Enter</button>
+
     <br>
     <pre id="candidateBookList"></pre>
 
@@ -13,8 +15,9 @@
         var suggestionKeys = Object.keys(suggestion)
         var linkKeys = Object.keys(link)
         var candidateBook = []
+        var cb = "", cc = "", cv = ""
+        document.getElementById("info").innerHTML = "\n\n\n"
 
-        /*
         // Execute a function when the user releases a key on the keyboard
         document.getElementById("input").addEventListener("keydown", function (event) {
             // Number 13 is the "Enter" key on the keyboard
@@ -22,7 +25,7 @@
                 // Cancel the default action, if needed
                 event.preventDefault();
                 // Trigger the button element with a click
-                find();
+                gotoPage();
                 document.getElementById("input").value = ""
             }
 
@@ -30,19 +33,51 @@
                 // Cancel the default action, if needed
                 event.preventDefault();
                 // Trigger the button element with a click
-                candidateValue = find();
-                document.getElementById("input").value = candidateValue[0]
+                update()
+                if (cb) {
+                    var text = document.getElementById("input").value
+                    var location = arrangeInput(text)
+                    var bookLocation = location[0]
+                    document.getElementById("input").value = text.replace(bookLocation, cb)
+                }
+            }
+
+            if (document.getElementById("candidateBookList").innerHTML) {
+                if ((event.keyCode >= 49) && (event.keyCode <= 53)) {
+                    i = event.keyCode - 49
+                    update()
+                    if (candidateBook.length >= (i + 1)) {
+                        // Cancel the default action, if needed
+                        event.preventDefault();
+                        var text = document.getElementById("input").value
+                        var location = arrangeInput(text)
+                        var bookLocation = location[0]
+                        document.getElementById("input").value = text.replace(bookLocation, candidateBook[i])
+                    }
+                }
             }
         });
-        */
-
         function isInt(a) {
             return a == parseInt(a)
         }
 
         function arrangeInput(text) {
+            text = text.trim()
+            var b = "", c = "", v = ""
             var words = text.split(/[ ,]+/);
-            var b = words[0], c = "", v = ""//need changing
+            if (words.length > 0) {
+                if (!isInt(words[0])) {
+                    b = words[0]
+                    if (words.length == 3) {
+                        c = words[1], v = words[2]
+                    }
+                }
+                if (words.length == 3) {
+                    if (!isInt(words[2])) {
+                        b = words[2], c = words[0], v = words[1]
+                    }
+                }
+            }
             return [b, c, v]
         }
 
@@ -50,27 +85,42 @@
 
         }
 
-        function listUpdate() {
+        function update() {
             var text = document.getElementById("input").value
             var location = arrangeInput(text)
-            bookLocation = location[0]
+            var bookLocation = location[0]
+
             if (bookLocation == "") {
                 candidateBook = ""
-            }else if(linkKeys.includes(bookLocation)){
-                candidateBook = ""
-            }else{
+            } else {
                 candidateBook = findBooks(bookLocation)
             }
-            // display 
-            var n = 5
-            if (candidateBook.length < n) {
-                n = candidateBook.length
-            }
+
             listText = ""
-            for (var i = 0; i < n; i++) {
-                listText += (i + 1).toString() + ": " + candidateBook[i] + "\n"
+            if (!(linkKeys.includes(bookLocation))) {
+                var n = 5
+                if (candidateBook.length < n) {
+                    n = candidateBook.length
+                }
+                for (var i = 0; i < n; i++) {
+                    listText += (i + 1).toString() + ": " + candidateBook[i] + "\n"
+                }
             }
+            console.log(candidateBook)
             document.getElementById("candidateBookList").innerHTML = listText
+
+            if (candidateBook.length > 0) {
+                cb = candidateBook[0]
+            } else {
+                cb = ""
+            }
+            cc = location[1]
+            cv = location[2]
+
+            infoText = 'book: ' + cb + "\n"
+            infoText += 'chapter: ' + cc + "\n"
+            infoText += 'verse: ' + cv + "\n"
+            document.getElementById("info").innerHTML = infoText
         }
 
         function findBooks(text) {
