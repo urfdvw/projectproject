@@ -20,7 +20,7 @@
         var cb = "", cc = "", cv = ""
         document.getElementById("info").innerHTML = "\n\n\n"
 
-        
+
         function newWindow() {
             myNewWindow = window.open("https://www.instantbible.org");
         }
@@ -89,14 +89,16 @@
         }
 
         function gotoPage() {
-            var domain1 = "https://www.instantbible.org/#/bible/version/cuvs/book/"
-            var domain2 = "/chapter/";
-            var urlChapter = domain1 + link[cb].charAt(0).toUpperCase() + link[cb].substring(1) + domain2 + cc;
-            console.log(urlChapter)
-            myNewWindow.location.replace(urlChapter);
-            var urlVerse = urlChapter + '#' + cv;
-            console.log(urlVerse)
-            setTimeout(function(){ myNewWindow.location.replace(urlVerse); }, 1500);
+            if (cv) {
+                var domain1 = "https://www.instantbible.org/#/bible/version/cuvs/book/"
+                var domain2 = "/chapter/";
+                var urlChapter = domain1 + link[cb].charAt(0).toUpperCase() + link[cb].substring(1) + domain2 + cc;
+                console.log(urlChapter)
+                myNewWindow.location.replace(urlChapter);
+                var urlVerse = urlChapter + '#' + cv;
+                console.log(urlVerse)
+                setTimeout(function () { myNewWindow.location.replace(urlVerse); }, 1500);
+            }
         }
 
         function update() {
