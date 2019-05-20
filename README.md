@@ -86,3 +86,7 @@
 read JSON into a page, t03
 - side load js script [link](https://www.w3schools.com/js/js_whereto.asp)
 - JSON can be used as dictionary [link](https://www.w3schools.com/js/js_json_objects.asp)
+- get all keys of a JSON object [link](https://stackoverflow.com/a/46009173)
+
+模糊搜索, t03
+- determine wether a item in array js [link](https://stackoverflow.com/a/2555311)
