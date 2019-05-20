@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <input id="input">
+    <script>
+        // Execute a function when the user releases a key on the keyboard
+        document.getElementById("input").addEventListener("keydown", function (event) {
+            event.preventDefault();
+            console.log(event.keyCode)
+        });
+    </script>
+
+</body>
+
+</html>

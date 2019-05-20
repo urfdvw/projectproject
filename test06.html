@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <input id="input" onkeyup="listUpdate()">
+
+    <button onclick="gotoPage()">Enter</button>
+    <br>
+    <pre id="candidateBookList"></pre>
+
+    <script src="books.js"></script>
+    <script>
+        var suggestionKeys = Object.keys(suggestion)
+        var linkKeys = Object.keys(link)
+        var candidateBook = []
+
+        /*
+        // Execute a function when the user releases a key on the keyboard
+        document.getElementById("input").addEventListener("keydown", function (event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                find();
+                document.getElementById("input").value = ""
+            }
+
+            if (event.keyCode === 9) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                candidateValue = find();
+                document.getElementById("input").value = candidateValue[0]
+            }
+        });
+        */
+
+        function isInt(a) {
+            return a == parseInt(a)
+        }
+
+        function arrangeInput(text) {
+            var words = text.split(/[ ,]+/);
+            var b = words[0], c = "", v = ""//need changing
+            return [b, c, v]
+        }
+
+        function gotoPage() {
+
+        }
+
+        function listUpdate() {
+            var text = document.getElementById("input").value
+            var location = arrangeInput(text)
+            bookLocation = location[0]
+            if (bookLocation == "") {
+                candidateBook = ""
+            }else if(linkKeys.includes(bookLocation)){
+                candidateBook = ""
+            }else{
+                candidateBook = findBooks(bookLocation)
+            }
+            // display 
+            var n = 5
+            if (candidateBook.length < n) {
+                n = candidateBook.length
+            }
+            listText = ""
+            for (var i = 0; i < n; i++) {
+                listText += (i + 1).toString() + ": " + candidateBook[i] + "\n"
+            }
+            document.getElementById("candidateBookList").innerHTML = listText
+        }
+
+        function findBooks(text) {
+            var relatedKeys = fuzzyFinder(text, suggestionKeys);
+            var value = []
+            for (var i = 0; i < relatedKeys.length; i++) {
+                candidateValue = suggestion[relatedKeys[i]];
+                if (!(value.includes(candidateValue))) {
+                    value.push(candidateValue)
+                }
+            }
+            return value
+        }
+
+        function fuzzyFinder(keyWord, list) {
+            // this is copied from 
+            // https://blog.csdn.net/YeShenLiaoSuiFeng/article/details/80519004
+            // need to be improved
+            if (!Array.isArray(list) && keyWord !== '') return
+            let arr = []
+            let reg = new RegExp(keyWord, 'i') // 不区分大小写
+            for (let i = 0; i < list.length; i++) {
+                if (list[i].match(reg)) arr.push(list[i])
+            }
+            return arr
+        }
+    </script>
+
+</body>
+
+</html>

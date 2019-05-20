@@ -90,3 +90,11 @@ read JSON into a page, t03
 
 模糊搜索, t03
 - determine wether a item in array js [link](https://stackoverflow.com/a/2555311)
+
+快捷键
+- trigger action by keyboard actions, t04, [link](https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp)
+- test key values, t05
+
+部分基本完备，开始搭建
+- return multiple values [link](https://stackoverflow.com/a/2917186)
+- [toString](https://www.w3schools.com/jsref/jsref_tostring_number.asp)
