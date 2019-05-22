@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        table,
+        th,
+        td {
+            border: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="start">
+        <button onclick="newWindow()">开始投影</button>
+        <H1>使用说明</H1>
+        <p>
+            点击【开始投影】打开投影窗口并进入控制界面。
+            将投影窗口拖拽到投影仪对应的显示器，之后所有的操作都可以在控制界面完成。
+        </p>
+        <p>
+            控制界面分为：提示区，输入区，联想区，回放区。
+        </p>
+        <p>
+            点击输入区进行输入。
+            输入的顺序可以是，书名（空格）章（空格）节，或者章（空格）节（空格）书名。
+            输入书名的时候可以使用：
+            完整书名的汉语拼音全拼（如yuhanyishu），
+            完整书名的汉语拼音首字母（如yhys），
+            书名简写的汉语拼音全拼（如yueyi），
+            英文书名（如1jhon）。
+        </p>
+        <p>
+            当出现联想的时候，
+            按【tab】输入联想的第一个备选项，
+            或者按对应【数字键】输入其他备选项。
+            请注意，并不需要输入完整的书名或者简写，
+            只要提示区出现了所需要的书名，
+            都可以按【tab】或者【数字键】输入书名。
+        </p>
+        <p>
+            当提示区的三个部分都填满时，
+            按键盘上【回车键】或者屏幕上的【转到经节】之后投影窗口会转到所需要的经节。
+            如果使用键盘操作，输入框会清空，并且留下历史记录。
+            如果用鼠标操作，输入内容会得到保留，并没有历史记录。
+        </p>
+        <p>
+            点击回放区的按键可以回放之前的经节。
+        </p>
+    </div>
+    <div id="UI" style="display: none;">
+        <pre id="info"></pre>
+        <input id="input" onkeyup="update()">
+        <button onclick="gotoPage(cb,cc,cv)">转到经节</button>
+        <br>
+        <table>
+            <tr style="height:200px">
+                <td valign="top">
+                    <pre id="candidateBookList"></pre>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="books.js"></script>
+    <script>
+        var myNewWindow
+        var suggestionKeys = Object.keys(suggestion)
+        var linkKeys = Object.keys(link)
+        var candidateBook = []
+        var cb = "", cc = "", cv = ""
+        document.getElementById("info").innerHTML = "book:\nchapter:\nverse:\n"
+
+        // Execute a function when the user hit a key on the keyboard
+        document.getElementById("input").addEventListener("keydown", function (event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                gotoPage(cb, cc, cv);
+                document.getElementById("input").value = ""
+                var span = document.createElement('span')
+                onclickText = "gotoPage('" + cb + "','" + cv + "','" + cc + "')"
+                buttonText = cb + ", " + cc + ", " + cv
+                span.innerHTML = '<button onclick="' + onclickText + '") >' + buttonText + '</button> <br>'
+                console.log(onclickText)
+                document.body.appendChild(span)
+            }
+
+            if (event.keyCode === 9) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                update()
+                if (cb) {
+                    var text = document.getElementById("input").value
+                    var location = arrangeInput(text)
+                    var bookLocation = location[0]
+                    document.getElementById("input").value = text.replace(bookLocation, cb)
+                }
+            }
+
+            if (document.getElementById("candidateBookList").innerHTML) {
+                if ((event.keyCode >= 49) && (event.keyCode <= 53)) {
+                    i = event.keyCode - 49
+                    update()
+                    if (candidateBook.length >= (i + 1)) {
+                        // Cancel the default action, if needed
+                        event.preventDefault();
+                        var text = document.getElementById("input").value
+                        var location = arrangeInput(text)
+                        var bookLocation = location[0]
+                        document.getElementById("input").value = text.replace(bookLocation, candidateBook[i])
+                    }
+                }
+            }
+        });
+
+        function newWindow() {
+            document.getElementById("start").style.display = "none"
+            document.getElementById("UI").style.display = "block"
+            myNewWindow = window.open("https://www.instantbible.org", "", "width=400,height=400")
+        }
+
+        function gotoPage(book, chapter, verse) {
+            if (!(verse)) {
+                return
+            }
+            var domain1 = "https://www.instantbible.org/#/bible/version/cuvs/book/"
+            var domain2 = "/chapter/";
+            var urlChapter = domain1 + link[book] + domain2 + chapter;
+            console.log(urlChapter)
+            myNewWindow.location.replace(urlChapter);
+            var urlVerse = urlChapter + '#' + verse;
+            console.log(urlVerse)
+            setTimeout(function () { myNewWindow.location.replace(urlVerse); }, 1500);
+        }
+
+        function update() {
+            var text = document.getElementById("input").value
+            var location = arrangeInput(text)
+            var bookLocation = location[0]
+
+            if (bookLocation == "") {
+                candidateBook = ""
+            } else {
+                candidateBook = findBooks(bookLocation)
+            }
+
+            listText = ""
+            if (!(linkKeys.includes(bookLocation))) {
+                var n = 5
+                if (candidateBook.length < n) {
+                    n = candidateBook.length
+                }
+                for (var i = 0; i < n; i++) {
+                    listText += (i + 1).toString() + ": " + candidateBook[i] + "\n"
+                }
+            }
+            console.log(candidateBook)
+            document.getElementById("candidateBookList").innerHTML = listText
+
+            if (candidateBook.length > 0) {
+                cb = candidateBook[0]
+            } else {
+                cb = ""
+            }
+            cc = location[1]
+            cv = location[2]
+
+            infoText = 'book: ' + cb + "\n"
+            infoText += 'chapter: ' + cc + "\n"
+            infoText += 'verse: ' + cv + "\n"
+            document.getElementById("info").innerHTML = infoText
+        }
+
+        function isInt(a) {
+            return a == parseInt(a)
+        }
+
+        function arrangeInput(text) {
+            text = text.trim()
+            var b = "", c = "", v = ""
+            var words = text.split(/[ ,]+/);
+            if (words.length > 0) {
+                if (!isInt(words[0])) {
+                    b = words[0]
+                    if (words.length == 3) {
+                        c = words[1], v = words[2]
+                    }
+                }
+                if (words.length == 3) {
+                    if (!isInt(words[2])) {
+                        b = words[2], c = words[0], v = words[1]
+                    }
+                }
+            }
+            return [b, c, v]
+        }
+
+        function findBooks(text) {
+            var relatedKeys = fuzzyFinder(text, suggestionKeys);
+            var value = []
+            for (var i = 0; i < relatedKeys.length; i++) {
+                candidateValue = suggestion[relatedKeys[i]];
+                if (!(value.includes(candidateValue))) {
+                    value.push(candidateValue)
+                }
+            }
+            return value
+        }
+
+        function fuzzyFinder(keyWord, list) {
+            // this is copied from 
+            // https://blog.csdn.net/YeShenLiaoSuiFeng/article/details/80519004
+            // need to be improved
+            if (!Array.isArray(list) && keyWord !== '') return
+            let arr = []
+            let reg = new RegExp(keyWord, 'i') // 不区分大小写
+            for (let i = 0; i < list.length; i++) {
+                if (list[i].match(reg)) arr.push(list[i])
+            }
+            return arr
+        }
+    </script>
+
+</body>
+
+</html>

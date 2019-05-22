@@ -100,3 +100,5 @@ read JSON into a page, t03
 - [toString](https://www.w3schools.com/jsref/jsref_tostring_number.asp)
 - [all to lower case](https://www.quora.com/How-do-you-convert-a-string-to-lowercase-in-JavaScript)
 - [replace](https://www.w3schools.com/jsref/jsref_replace.asp)
+- [hide element](https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp)
+- [add a button](https://stackoverflow.com/a/6956368)
