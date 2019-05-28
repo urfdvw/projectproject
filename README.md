@@ -102,3 +102,9 @@ read JSON into a page, t03
 - [replace](https://www.w3schools.com/jsref/jsref_replace.asp)
 - [hide element](https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp)
 - [add a button](https://stackoverflow.com/a/6956368)
+
+界面的改进，用drop down list显示联想
+- [从鼠标drop](https://stackoverflow.com/a/26319325)
+- [还是从鼠标](https://stackoverflow.com/a/17296060)
+- [光标位置in int](https://stackoverflow.com/a/48150864)
+- [almost the thing](https://medium.com/@jh3y/how-to-where-s-the-caret-getting-the-xy-position-of-the-caret-a24ba372990a)
