@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="textarea-caret-position.js"></script>
+    <script>
+        function onShowBtn() {
+            var element = document.getElementById('popup')
+            element.style.visibility = 'visible'
+            element.style.left = event.pageX + 'px'
+            element.style.top = event.pageY + 'px'
+        }
+        function onHideBtn() {
+            var element = document.getElementById('popup');
+            element.style.visibility = 'hidden'
+        }
+        function showEvent() {
+            var input = document.getElementById('input')
+            var caret = getCaretCoordinates(input, input.selectionEnd);
+            console.log(caret)
+            console.log('(top, left) = (%s, %s)', caret.top, caret.left);
+            console.log('(top, left) = (%s, %s)', input.offsetTop, input.offsetLeft);
+            X = caret.left + input.offsetLeft
+            Y = caret.top + input.offsetTop
+            var element = document.getElementById('popup')
+            element.style.visibility = 'visible'
+            element.style.left = X + 'px'
+            element.style.top = Y + 'px'
+        }
+
+    </script>
+    <style>
+        #controls {
+            display: inline-block;
+            padding: 16px;
+            border-radius: 6px;
+            border: solid 1px #555;
+            background: #AAA;
+        }
+
+        #popup {
+            border: solid 1px #777;
+            border-radius: 4px;
+            padding: 12px;
+            background: #DDD;
+            display: inline-block;
+            z-index: 2;
+            position: absolute;
+            left: 100px;
+            top: 50px;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='controls'>
+        <input type='button' value='hide' onclick='onHideBtn()'>
+        <input type='button' value='show' onclick='onShowBtn()'>
+        <input type="text" id='input' onkeyup="showEvent()">
+    </div>
+    <br>
+    <div id='popup'>
+        <p>This is some assorted
+            text</p>
+        <hr>
+        <ul>
+            <li>item a</li>
+            <li>item 2</li>
+            <li>item iii</li>
+        </ul>
+    </div>
+</body>
+
+</html>

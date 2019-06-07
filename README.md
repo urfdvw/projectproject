@@ -108,3 +108,17 @@ read JSON into a page, t03
 - [还是从鼠标](https://stackoverflow.com/a/17296060)
 - [光标位置in int](https://stackoverflow.com/a/48150864)
 - [almost the thing](https://medium.com/@jh3y/how-to-where-s-the-caret-getting-the-xy-position-of-the-caret-a24ba372990a)
+
+尝试读懂上面最后一条的内容
+- [=>](https://codeburst.io/javascript-arrow-functions-for-beginners-926947fc0cdc)
+    - [const](https://www.w3schools.com/js/js_const.asp)
+        - [const and let](https://blog.pragmatists.com/let-your-javascript-variables-be-constant-1633e56a948d)
+    - why arrow functions are constant, I guess the answer is whatever.
+
+set element position test08
+- [set style](https://www.w3schools.com/jsref/prop_style_left.asp)
+- [set visibility](https://www.w3schools.com/cssref/pr_class_visibility.asp)
+
+get cater position test09
+- [offset property](https://www.w3schools.com/jsref/prop_element_offsettop.asp)
+- [use this package](https://github.com/component/textarea-caret-position/blob/master/index.js)
