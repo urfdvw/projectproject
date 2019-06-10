@@ -122,3 +122,4 @@ set element position test08
 get cater position test09
 - [offset property](https://www.w3schools.com/jsref/prop_element_offsettop.asp)
 - [use this package](https://github.com/component/textarea-caret-position/blob/master/index.js)
+- [line height](https://github.com/component/textarea-caret-position/issues/48)
