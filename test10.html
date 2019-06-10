@@ -181,11 +181,11 @@
             if (listText.length > 0) {
                 var input = document.getElementById('input')
                 var caret = getCaretCoordinates(input, input.selectionEnd);
-                console.log(caret)
+                console.log(input.selectionEnd)
                 console.log('(top, left, height) = (%s, %s, %s)', caret.top, caret.left, caret.height);
                 console.log('(top, left) = (%s, %s)', input.offsetTop, input.offsetLeft);
                 X = caret.left + input.offsetLeft
-                Y = caret.top + input.offsetTop + Math.ceil(caret.height*1.2)
+                Y = caret.top + input.offsetTop + input.offsetHeight
                 reclist.style.visibility = 'visible'
                 reclist.style.left = X + 'px'
                 reclist.style.top = Y + 'px'
