@@ -60,7 +60,7 @@
     - 模糊搜索查找书名
     - 输入法式的界面
 
-## 实施
+## 实验记录
 
 ### 投影显示
 - 打开一个新的窗口, t01t02, [link](https://www.w3schools.com/jsref/met_win_open.asp)
@@ -79,7 +79,7 @@
 如果不把圣经数据放在app里面的话，数据就只有书名，没有必要还从后台调数据。
 最简单的把数据放在前端的方式，就是在代码中直接加入[json](https://www.w3schools.com/js/js_json.asp)
 
-将CSV转换为JSON，python code
+### 将CSV转换为JSON，python code
 - read csv as utf8 [link](https://stackoverflow.com/a/14786752)
 - dump json as utf8 [link](https://stackoverflow.com/a/18337754)
 
@@ -88,14 +88,14 @@ read JSON into a page, t03
 - JSON can be used as dictionary [link](https://www.w3schools.com/js/js_json_objects.asp)
 - get all keys of a JSON object [link](https://stackoverflow.com/a/46009173)
 
-模糊搜索, t03
+### 模糊搜索, t03
 - determine wether a item in array js [link](https://stackoverflow.com/a/2555311)
 
-快捷键
+### 快捷键
 - trigger action by keyboard actions, t04, [link](https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp)
 - test key values, t05
 
-部分基本完备，开始搭建
+### 部分基本完备，开始搭建
 - return multiple values [link](https://stackoverflow.com/a/2917186)
 - [toString](https://www.w3schools.com/jsref/jsref_tostring_number.asp)
 - [all to lower case](https://www.quora.com/How-do-you-convert-a-string-to-lowercase-in-JavaScript)
@@ -103,7 +103,7 @@ read JSON into a page, t03
 - [hide element](https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp)
 - [add a button](https://stackoverflow.com/a/6956368)
 
-界面的改进，用drop down list显示联想
+### 界面的改进，用drop down list显示联想
 - [从鼠标drop](https://stackoverflow.com/a/26319325)
 - [还是从鼠标](https://stackoverflow.com/a/17296060)
 - [光标位置in int](https://stackoverflow.com/a/48150864)
@@ -119,7 +119,11 @@ set element position test08
 - [set style](https://www.w3schools.com/jsref/prop_style_left.asp)
 - [set visibility](https://www.w3schools.com/cssref/pr_class_visibility.asp)
 
-get cater position test09
+set div position test09
 - [offset property](https://www.w3schools.com/jsref/prop_element_offsettop.asp)
+
+get carter position test10
 - [use this package](https://github.com/component/textarea-caret-position/blob/master/index.js)
 - [line height](https://github.com/component/textarea-caret-position/issues/48)
+
+reorganize code test11
