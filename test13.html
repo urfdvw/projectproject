@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #control {
+            background-color: rgb(188, 235, 207);
+        }
+
+        #input {
+            background-color: rgb(188, 218, 235);
+        }
+
+        #preview {
+            background-color: rgb(208, 188, 235);
+            float: right;
+            width: 66.67%;
+        }
+
+        #history {
+            background-color: rgb(235, 188, 194);
+            float: left;
+            width: 33.33%;
+        }
+
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+        @media screen and (max-width: 600px) {
+            #preview, #history{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id='control'>
+        <h1>control</h1>
+    </div>
+
+    <div id='input'>
+        <h1>input</h1>
+    </div>
+
+    <div id='preview'>
+        <h1>preview</h1>
+    </div>
+
+    <div id='history'>
+        <h1>history</h1>
+    </div>
+</body>
+
+</html>
