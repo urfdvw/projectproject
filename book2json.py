@@ -1,3 +1,4 @@
+#%%
 import csv
 import json
 
@@ -20,7 +21,15 @@ for i in range(len(data)):
     link[data[i][0]] = data[i][1]
     link[data[i][2]] = data[i][1]
 
+book_ind = {}
+for i in range(len(data)):
+    for j in range(len(data[0])):
+        book_ind[data[i][j]] = (i + 1)
+
 with open('suggestion.json', 'w', encoding='utf-8') as json_file:
     json.dump(suggestion, json_file, ensure_ascii=False)
 with open('link.json', 'w', encoding='utf-8') as json_file:
     json.dump(link, json_file, ensure_ascii=False)
+with open('book_ind.json', 'w', encoding='utf-8') as json_file:
+    json.dump(book_ind, json_file, ensure_ascii=False)
+#%%

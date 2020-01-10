@@ -31,9 +31,10 @@ let v_cur = 16
 // content display ///////////////////////////////////////////////////////////////////////
 
 // main function
-function display_verse() {
+function display_verse(b, c, v) {
     // get desired verse
-    let bcv_input = get_input() // to be replaced 
+    // let bcv_input = get_input() // to be replaced 
+    bcv_input = [b, c, v]
     // if desired verse in the current chapter
     if (b_cur == bcv_input[0] && c_cur == bcv_input[1]) {
         v_cur = bcv_input[2]
@@ -58,7 +59,7 @@ function display_chapter() {
     for (let i = 0; i < verses.length; i++) {
         // prepare text block
         let aPieceOfText = document.createElement("p")
-        aPieceOfText.innerHTML = (i + 1) + ' ' + verses[i][2] + '<br>' + (i + 1) + ' ' + verses[i][0]
+        aPieceOfText.innerHTML = (i + 1) + ' ' + verses[i][1] + '<br>' + (i + 1) + ' ' + verses[i][0]
         aPieceOfText.id = "" + (i + 1)
         aPieceOfText.className = text_class
         // append text
