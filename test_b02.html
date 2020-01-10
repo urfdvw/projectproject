@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 
+<!-- <head>
+    <link rel="stylesheet" type="text/css" href="small_window.css">
+</head> -->
+
 <body>
 
     <p>Click the button to make a new page with text.</p>
 
     <button onclick="newPage()">Create a new page</button>
-    <button onclick="addText()">scroll</button>
+    <button onclick="scorll_to_next(1)">next verse</button>
+    <button onclick="scorll_to_next(-1)">previous verse</button>
 
     <script src="bible.js"></script>
     <script src="bible_tool.js"></script>
@@ -27,17 +32,36 @@
         let v = 10
 
         function newPage() {
-            myNewWindow = window.open("", "", "width=400,height=400") // open a new window, specify size to make a mini window
+            // open a new window, specify size to make a mini window
+            myNewWindow = window.open("", "", "width=400,height=400")
+            // apply style // https://stackoverflow.com/a/26300876/7037749
+            myNewWindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="small_window.css"></head><body></body></html>');
+            
+            // get all verses in a chapter
             let verses = get_verses_chapter(b, c)
+            // append verses to html
+            let text_class = "odd"
             for (let i = 0; i < verses.length; i++) {
-                let aPieceOfText = document.createElement("div")
-                aPieceOfText.innerHTML = (i + 1) + verses[i][2] + '<br>' + (i + 1) + verses[i][0]
+                let aPieceOfText = document.createElement("p")
+                aPieceOfText.innerHTML = (i + 1) + ' ' + verses[i][2] + '<br>' + (i + 1) + ' ' + verses[i][0]
                 aPieceOfText.id = "" + (i + 1)
+                aPieceOfText.className = text_class
+                // append text
                 myNewWindow.document.body.appendChild(aPieceOfText);
+                // change text class for styling
+                if (text_class == "odd") {
+                    text_class = "even"
+                } else {
+                    text_class = "odd"
+                }
             }
+            // scroll to position
+            setTimeout(function () {
+                go_to_verse(v)
+            }, 100);
         }
 
-        function addText() {
+        function scroll_to_verse(v) {
             // only work for chrome
             // https://stackoverflow.com/a/49842367/7037749
             var testDiv = myNewWindow.document.getElementById("" + v);
@@ -47,15 +71,22 @@
                 behavior: 'smooth'
             });
         }
-
-        function cleanText() {
-            myNewWindow.document.body.innerHTML = '';
-            var aPieceOfText = document.createElement("H1");
-            aPieceOfText.innerHTML = "This is a new page";
-            myNewWindow.document.body.appendChild(aPieceOfText);
+        function go_to_verse(v) {
+            // only work for chrome
+            // https://stackoverflow.com/a/49842367/7037749
+            var testDiv = myNewWindow.document.getElementById("" + v);
+            const y = testDiv.getBoundingClientRect().top + myNewWindow.scrollY;
+            myNewWindow.scroll({
+                top: y
+            });
         }
 
-
+        function scorll_to_next(i) {
+            if (verse_exists(b, c, v+i)) {
+                v += i
+                scroll_to_verse(v)
+            }
+        }
     </script>
 
 </body>
