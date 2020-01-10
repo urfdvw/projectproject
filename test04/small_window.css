@@ -1,0 +1,11 @@
+p {
+    font-size: 40px;
+}
+
+.odd {
+    color: red;
+}
+
+.even {
+    color: blue;
+}
