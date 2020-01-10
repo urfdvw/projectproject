@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p>Click the button to make a new page with text.</p>
+
+    <button onclick="newPage()">Create a new page</button>
+    <br>
+    <input id=b>
+    <input id=c>
+    <input id=v>
+    <br>
+    <button onclick="display_verse()">go to</button>
+    <button onclick="scorll_to_next(1)">next verse</button>
+    <button onclick="scorll_to_next(-1)">previous verse</button>
+
+    <script src="bible.js"></script>
+    <script src="bible_tool.js"></script>
+    <script src="project_control.js"></script>
+    
+    <script>
+        // 這個網頁含有中文
+        function get_input() {
+            let b_input = parseInt(document.getElementById('b').value)
+            let c_input = parseInt(document.getElementById('c').value)
+            let v_input = parseInt(document.getElementById('v').value)
+            if (verse_exists(b_input, c_input, v_input)) {
+                return [b_input, c_input, v_input]
+            } else {
+                throw ('invalid input')
+            }
+        }
+    </script>
+
+</body>
+
+</html>
