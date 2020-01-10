@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p>Click the button to make a new page with text.</p>
+
+    <button onclick="newPage()">Create a new page</button>
+    <button onclick="addText()">Add text to the new page</button>
+    <button onclick="cleanText()">Clean added text</button>
+
+    <script src="bible.js"></script>
+    <script src="bible_tool.js"></script>
+    <script>
+        // 這個網頁含有中文
+
+        // a handle of the new window that othe functions can operate
+        var myNewWindow
+        // auto close new window
+        window.addEventListener("beforeunload", function (e) {
+            // Do something
+            myNewWindow.close()
+        }, false);
+
+        // test data
+        let b = 1
+        let c = 2
+        let v = 10
+
+        function newPage() {
+            myNewWindow = window.open("", "", "width=400,height=400") // open a new window, specify size to make a mini window
+            let verses = get_verses_chapter(b, c)
+            for (let i = 0; i < verses.length; i++) {
+                let aPieceOfText = document.createElement("p")
+                aPieceOfText.innerHTML = (i+1) + verses[i][2] + '<br>' + (i+1) + verses[i][0]
+                aPieceOfText.id = "" + i
+                myNewWindow.document.body.appendChild(aPieceOfText);
+            }
+            var testDiv = myNewWindow.document.getElementById("" + v);
+            console.log(testDiv.offsetTop)
+            console.log(testDiv.offsetLeft)
+        }
+
+        function addText() {
+            var aPieceOfText = document.createElement("pre");
+            aPieceOfText.innerHTML = "This is a piece of text";
+            myNewWindow.document.body.appendChild(aPieceOfText);
+        }
+
+        function cleanText() {
+            myNewWindow.document.body.innerHTML = '';
+            var aPieceOfText = document.createElement("H1");
+            aPieceOfText.innerHTML = "This is a new page";
+            myNewWindow.document.body.appendChild(aPieceOfText);
+        }
+    </script>
+
+</body>
+
+</html>
