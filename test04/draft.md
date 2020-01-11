@@ -2,5 +2,5 @@ Projection is done
 
 TODOs
 - preview
-- history
+- next and prevous verse
 - language, and font

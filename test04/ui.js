@@ -10,7 +10,7 @@ function mainAction() {
             // redirect side page if infomation complete
             display_verse(bcv[0], bcv[1], bcv[2]);
             // create recall button
-            addRecallButton()
+            addRecallButton(bcv[0], bcv[1], bcv[2], tr_book_name)
             // clear text
             init()
         }
@@ -188,15 +188,15 @@ function updateInfo() {
     document.getElementById("info").innerHTML = infoText
 }
 
-function addRecallButton() {
-    // let div = document.createElement('div')
-    // gotoText = "display_verse('" + cb + "','" + cc + "','" + cv + "')"
-    // previewText = "previewPage('" + cb + "','" + cc + "','" + cv + "')"
-    // buttonText = cb + ", " + cc + ", " + cv
-    // div.innerHTML = '<button onclick="' + gotoText + '") >投影</button>'
-    // div.innerHTML += '<button onclick="' + previewText + '") >预览</button>'
-    // div.innerHTML += buttonText
-    // document.getElementById('historyblock').appendChild(div)
+function addRecallButton(cb, cc, cv, book_name) {
+    let div = document.createElement('div')
+    gotoText = "display_verse('" + cb + "','" + cc + "','" + cv + "')"
+    previewText = "previewPage('" + cb + "','" + cc + "','" + cv + "')"
+    buttonText = book_name[cb] + ", " + cc + ", " + cv
+    div.innerHTML = '<button onclick="' + gotoText + '") >投影</button>'
+    div.innerHTML += '<button onclick="' + previewText + '") >预览</button>'
+    div.innerHTML += buttonText
+    document.getElementById('historyblock').appendChild(div)
 }
 
 // tools ///////////////////////////////////////////////////////////////////////////
