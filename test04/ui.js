@@ -24,7 +24,7 @@ function mainAction() {
         event.preventDefault(); // Cancel the default action
         // try to preview
         if (bcv[0] != -1) { // if projectable
-            // TODO
+            preview_verse(bcv[0], bcv[1], bcv[2]);
         }
     } else if ((event.keyCode >= 65) && (event.keyCode <= 90)) {// Letter
         // just input letters
@@ -191,7 +191,7 @@ function updateInfo() {
 function addRecallButton(cb, cc, cv, book_name) {
     let div = document.createElement('div')
     gotoText = "display_verse('" + cb + "','" + cc + "','" + cv + "')"
-    previewText = "previewPage('" + cb + "','" + cc + "','" + cv + "')"
+    previewText = "preview_verse('" + cb + "','" + cc + "','" + cv + "')"
     buttonText = book_name[cb] + ", " + cc + ", " + cv
     div.innerHTML = '<button onclick="' + gotoText + '") >投影</button>'
     div.innerHTML += '<button onclick="' + previewText + '") >预览</button>'
