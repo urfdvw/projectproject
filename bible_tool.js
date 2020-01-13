@@ -29,7 +29,7 @@ function get_verses_chapter(b, c) {
     }
     // get and output 
     for (let v = 1; v <= ve; v++) {
-        out.push(bible[verse_index(b, c, v)])
+        out.push(v)
     }
     return out
 }

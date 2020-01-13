@@ -1,6 +1,10 @@
-
-
 // new window life span ///////////////////////////////////////////////////////////////////
+// button action
+function newWindow() {
+    document.getElementById("start").style.display = "none"
+    document.getElementById("UI").style.display = "block"
+    newPage()
+}
 
 // a handle of the new window that othe functions can operate
 var myNewWindow
@@ -32,18 +36,22 @@ let v_cur = 16
 
 // main function
 function display_verse(b, c, v) {
-    // get desired verse
-    // let bcv_input = get_input() // to be replaced 
-    bcv_input = [b, c, v]
+    // parse
+    let b_input = parseInt(b)
+    let c_input = parseInt(c)
+    let v_input = parseInt(v)
+    if (!(verse_exists(b_input, c_input, v_input))) {
+        throw ('invalid input')
+    }
     // if desired verse in the current chapter
-    if (b_cur == bcv_input[0] && c_cur == bcv_input[1]) {
-        v_cur = bcv_input[2]
+    if (b_cur == b_input && c_cur == c_input) {
+        v_cur = v_input
         scroll_to_verse()
     } else {
         // if desired verse not in the current chapter
-        b_cur = bcv_input[0]
-        c_cur = bcv_input[1]
-        v_cur = bcv_input[2]
+        b_cur = b_input
+        c_cur = c_input
+        v_cur = v_input
         display_chapter()
     }
 }
@@ -59,9 +67,10 @@ function display_chapter() {
     for (let i = 0; i < verses.length; i++) {
         // prepare text block
         let aPieceOfText = document.createElement("p")
-        aPieceOfText.innerHTML = (i + 1) + ' ' + verses[i][1] + '<br>' + (i + 1) + ' ' + verses[i][0]
+        aPieceOfText.innerHTML = bible_versions([b_cur, c_cur, verses[i]])
         aPieceOfText.id = "" + (i + 1)
         aPieceOfText.className = text_class
+        aPieceOfText.style = "font-size:" + font_size() + "px;"
         // append text
         myNewWindow.document.body.appendChild(aPieceOfText);
         // alter text class for styling
