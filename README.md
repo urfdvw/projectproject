@@ -127,3 +127,6 @@ get carter position test10
 - [line height](https://github.com/component/textarea-caret-position/issues/48)
 
 reorganize code test11
+
+# 已知bug
+英文模式下不能输入 约翰一书 3章 5 节，因为数字打头的 书名阻碍了输入
