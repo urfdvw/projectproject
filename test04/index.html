@@ -8,39 +8,6 @@
 <body>
     <div id="start">
         <button onclick="newWindow()">开始投影</button>
-        <H1>使用说明</H1>
-        <p>
-            点击【开始投影】打开投影窗口并进入控制界面。
-            将投影窗口拖拽到投影仪对应的显示器，之后所有的操作都可以在控制界面完成。
-        </p>
-        <p>
-            点击输入框进行输入。
-            输入的顺序可以是，书名（空格）章（空格）节，或者章（空格）节（空格）书名。
-            可以输入下列简写查找书名：
-            <pre>
-                    完整书名的汉语拼音全拼（如yuhanyishu）
-                    完整书名的汉语拼音首字母（如yhys）
-                    书名简写的汉语拼音全拼（如yueyi）
-                    英文书名（如1jhon）
-                </pre>
-        </p>
-        <p>
-            当出现联想的时候，
-            按【空格键】输入联想的第一个备选项，
-            或者按对应【数字键】输入其他备选项。
-            只要列表中出现了所需要的书名，
-            都可以按【空格键】或者【数字键】输入书名，
-            并不需要输入完整的书名或者简写。
-        </p>
-        <p>
-            输入完整后，
-            按键盘上【Shift键】或者屏幕上的【预览】可以预览所需要的经节。
-            按键盘上【Tab键】可将输入的经节存入历史记录。
-            按键盘上【回车键】或者屏幕上的【转到经节】之后投影窗口会转到所需要的经节。
-        </p>
-        <p>
-            点击历史记录按键可以回放之前的经节。
-        </p>
     </div>
     <div id="UI" style="display: none;">
         <div id='controlblock'>
@@ -48,10 +15,19 @@
         </div>
 
         <div id='inputblock'>
-            <input id="input" onkeydown="mainAction()" onkeyup="update()">
-            <button onclick="gotoPage(cb,cc,cv)">投影</button>
-            <button onclick="previewPage(cb,cc,cv)">预览</button>
-            <button onclick="recordPage()">记录</button>
+            <p>
+                <input type="radio" name='language' id="si" checked onchange="display_chapter()">简体,
+                <input type="radio" name='language' id="tr" onchange="display_chapter()">繁体,
+                <input type="radio" name='language' id="en" onchange="display_chapter()">English;
+                <input type="checkbox" id='two_version' checked onchange="display_chapter()">对照
+                <a href="help.html" target="_blank">使用说明</a>
+            </p>
+            <p>
+                <input id="input" onkeydown="mainAction()" onkeyup="update()">
+                <button onclick="project_button()">投影</button>
+                <button onclick="preview_button()">预览</button>
+                <button onclick="record_button()">记录</button>
+            </p>
         </div>
 
         <div id='previewblock'>
@@ -75,11 +51,7 @@
     <script src="ui.js"></script>
 
     <script>
-        function newWindow() {
-            document.getElementById("start").style.display = "none"
-            document.getElementById("UI").style.display = "block"
-            newPage()
-        }
+        init();
     </script>
 </body>
 

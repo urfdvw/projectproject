@@ -24,10 +24,10 @@ function preview_verse(b_in, c_in, v_in) {
     for (let i = 0; i < verses.length; i++) {
         // prepare text block
         let aPieceOfText = document.createElement("p")
-        aPieceOfText.innerHTML = (i + 1) + ' ' + verses[i][1] + '<br>' + (i + 1) + ' ' + verses[i][0]
+        aPieceOfText.innerHTML = bible_versions([b, c, verses[i]])
         aPieceOfText.id = "" + (i + 1)
         aPieceOfText.className = text_class
-        aPieceOfText.onclick = function(){display_verse(b, c, i+1)};
+        aPieceOfText.onclick = function(){display_verse(b, c, i+1); addRecallButton(b, c, i+1)};
         // append text
         preview.document.body.appendChild(aPieceOfText);
         // alter text class for styling

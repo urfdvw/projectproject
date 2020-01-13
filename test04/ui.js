@@ -10,7 +10,7 @@ function mainAction() {
             // redirect side page if infomation complete
             display_verse(bcv[0], bcv[1], bcv[2]);
             // create recall button
-            addRecallButton(bcv[0], bcv[1], bcv[2], tr_book_name)
+            addRecallButton(bcv[0], bcv[1], bcv[2])
             // clear text
             init()
         }
@@ -18,7 +18,10 @@ function mainAction() {
         event.preventDefault(); // Cancel the default action
         // try to record 
         if (bcv[0] != -1) { // if projectable
-            // TODO
+            // create recall button
+            addRecallButton(bcv[0], bcv[1], bcv[2])
+            // clear text
+            init()
         }
     } else if (event.keyCode === 16) {// Shift
         event.preventDefault(); // Cancel the default action
@@ -50,6 +53,10 @@ function mainAction() {
                 .getElementById("input").value.replace(words[0], candidateBook[0] + " ")
         }
     } else if (event.keyCode === 8 || event.keyCode === 46) { // backspace and del
+    } else if (event.keyCode === 38 || event.keyCode === 37|| event.keyCode === 33) { // up pageup
+        scorll_to_next(-1);
+    } else if (event.keyCode === 40 || event.keyCode === 39|| event.keyCode === 34) { // down pagedown
+        scorll_to_next(1);
     } else { // any other input
         event.preventDefault(); // Cancel the default action
     }
@@ -58,6 +65,34 @@ function mainAction() {
 function update() {
     updateList()
     updateInfo()
+}
+
+// button actions
+function project_button() {
+    let words = split_input()
+    let bcv = words_2_bcv(words)
+    if (bcv[0] != -1) { // if projectable
+        // redirect side page if infomation complete
+        display_verse(bcv[0], bcv[1], bcv[2]);
+    }
+}
+
+function preview_button() {
+    let words = split_input()
+    let bcv = words_2_bcv(words)
+    if (bcv[0] != -1) { // if projectable
+        // redirect side page if infomation complete
+        preview_verse(bcv[0], bcv[1], bcv[2]);
+    }
+}
+
+function record_button() {
+    let words = split_input()
+    let bcv = words_2_bcv(words)
+    if (bcv[0] != -1) { // if projectable
+        // redirect side page if infomation complete
+        addRecallButton(bcv[0], bcv[1], bcv[2]);
+    }
 }
 // inputs ///////////////////////////////////////////////////////////////////////////
 
@@ -117,7 +152,7 @@ function getList() {
     }
 
     // get candidateBook
-    let candidateBook = findBooks(book_text, si_book_name)
+    let candidateBook = findBooks(book_text)
 
     // no display situations
     if (candidateBook.includes(book_text)) { // if input is one of the candidate Books
@@ -156,7 +191,7 @@ function updateList() {
     reclist.style.top = Y + 'px'
 }
 
-function findBooks(keyWord, book_name) {
+function findBooks(keyWord) {
     if (keyWord.length == 0) {
         return []
     }
@@ -164,7 +199,7 @@ function findBooks(keyWord, book_name) {
     let relatedKeys = fuzzyFinder(keyWord, suggestionKeys);
     let value = []
     for (let i = 0; i < relatedKeys.length; i++) {
-        candidateValue = book_name[book_ind[relatedKeys[i]]];
+        candidateValue = book_name()[book_ind[relatedKeys[i]]];
         if (!(value.includes(candidateValue))) {
             value.push(candidateValue)
         }
@@ -178,25 +213,66 @@ function init() {
     updateInfo()
 }
 function updateInfo() {
+    // get bcv from input text
     let words = split_input()
     let bcv = words_2_bcv(words)
-    if (bcv[0] != -1) {
-        infoText = bible[verse_index(bcv[0], bcv[1], bcv[2])]
-    } else {
+    let infoText = ''
+    if (bcv[0] == -1) {
         infoText = '请输入“书名（空格）章（空格）节”，或者“章（空格）节（空格）书名”'
+    } else {
+        infoText = bible_versions(bcv) + "<br> [Enter]投影， [Shift]预览， [Tab]记录"
     }
     document.getElementById("info").innerHTML = infoText
 }
 
-function addRecallButton(cb, cc, cv, book_name) {
+function addRecallButton(cb, cc, cv) {
     let div = document.createElement('div')
     gotoText = "display_verse('" + cb + "','" + cc + "','" + cv + "')"
     previewText = "preview_verse('" + cb + "','" + cc + "','" + cv + "')"
-    buttonText = book_name[cb] + ", " + cc + ", " + cv
+    buttonText = book_name()[cb] + ", " + cc + ", " + cv
     div.innerHTML = '<button onclick="' + gotoText + '") >投影</button>'
     div.innerHTML += '<button onclick="' + previewText + '") >预览</button>'
     div.innerHTML += buttonText
     document.getElementById('historyblock').appendChild(div)
+}
+
+// lagguage /////////////////////////////////////////////////////////////////////////
+function bible_versions(bcv) {
+    // get language
+    var ind = 0
+    if (document.getElementById("si").checked) {
+        ind = 1
+    }
+    if (document.getElementById("tr").checked) {
+        ind = 2
+    }
+    if (document.getElementById("en").checked) {
+        ind = 0
+    }
+    // creat text
+    let text = bcv[1] + ':' + bcv[2] + ' ' + bible[verse_index(bcv[0], bcv[1], bcv[2])][ind]
+    // get second version
+    if (!(document.getElementById("two_version").checked)) {
+        return text
+    }
+    if (ind == 0) {
+        text += '<br>' + bible[verse_index(bcv[0], bcv[1], bcv[2])][1]
+    } else {
+        text += '<br>' + bible[verse_index(bcv[0], bcv[1], bcv[2])][0]
+    }
+    return text
+}
+
+function book_name() {
+    if (document.getElementById("si").checked) {
+        return si_book_name
+    }
+    if (document.getElementById("tr").checked) {
+        return tr_book_name
+    }
+    if (document.getElementById("en").checked) {
+        return en_book_name
+    }
 }
 
 // tools ///////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,10 @@
-
-
 // new window life span ///////////////////////////////////////////////////////////////////
+// button action
+function newWindow() {
+    document.getElementById("start").style.display = "none"
+    document.getElementById("UI").style.display = "block"
+    newPage()
+}
 
 // a handle of the new window that othe functions can operate
 var myNewWindow
@@ -36,7 +40,6 @@ function display_verse(b, c, v) {
     let b_input = parseInt(b)
     let c_input = parseInt(c)
     let v_input = parseInt(v)
-    console.log(b_input,c_input,v_input)
     if (!(verse_exists(b_input, c_input, v_input))) {
         throw ('invalid input')
     }
@@ -64,7 +67,7 @@ function display_chapter() {
     for (let i = 0; i < verses.length; i++) {
         // prepare text block
         let aPieceOfText = document.createElement("p")
-        aPieceOfText.innerHTML = (i + 1) + ' ' + verses[i][1] + '<br>' + (i + 1) + ' ' + verses[i][0]
+        aPieceOfText.innerHTML = bible_versions([b_cur, c_cur, verses[i]])
         aPieceOfText.id = "" + (i + 1)
         aPieceOfText.className = text_class
         // append text
