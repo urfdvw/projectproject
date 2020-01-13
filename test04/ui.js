@@ -53,9 +53,12 @@ function mainAction() {
                 .getElementById("input").value.replace(words[0], candidateBook[0] + " ")
         }
     } else if (event.keyCode === 8 || event.keyCode === 46) { // backspace and del
-    } else if (event.keyCode === 38 || event.keyCode === 37|| event.keyCode === 33) { // up pageup
+    } else if (event.keyCode === 37 || event.keyCode === 39) { // left right
+    } else if (event.keyCode === 38 || event.keyCode === 33) { // up pageup
+        event.preventDefault(); // Cancel the default action
         scorll_to_next(-1);
-    } else if (event.keyCode === 40 || event.keyCode === 39|| event.keyCode === 34) { // down pagedown
+    } else if (event.keyCode === 40 || event.keyCode === 34) { // down pagedown
+        event.preventDefault(); // Cancel the default action
         scorll_to_next(1);
     } else { // any other input
         event.preventDefault(); // Cancel the default action
@@ -236,7 +239,10 @@ function addRecallButton(cb, cc, cv) {
     document.getElementById('historyblock').appendChild(div)
 }
 
-// lagguage /////////////////////////////////////////////////////////////////////////
+// get setting /////////////////////////////////////////////////////////////////////////
+function font_size() {
+    return parseInt(document.getElementById('fsize').value)
+}
 function bible_versions(bcv) {
     // get language
     var ind = 0

@@ -70,6 +70,7 @@ function display_chapter() {
         aPieceOfText.innerHTML = bible_versions([b_cur, c_cur, verses[i]])
         aPieceOfText.id = "" + (i + 1)
         aPieceOfText.className = text_class
+        aPieceOfText.style = "font-size:" + font_size() + "px;"
         // append text
         myNewWindow.document.body.appendChild(aPieceOfText);
         // alter text class for styling
