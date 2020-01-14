@@ -7,7 +7,6 @@ with open('books.csv', newline='', encoding='utf-8') as f:
     reader = csv.reader(f)
     for row in reader:
         data.append(row)
-data[0][0] = data[0][0][1:]
 
 tr_names = {}
 si_names = {}

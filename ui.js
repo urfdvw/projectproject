@@ -261,10 +261,10 @@ function bible_versions(bcv) {
     if (!(document.getElementById("two_version").checked)) {
         return text
     }
-    if (ind == 0) {
-        text += '<br>' + bible[verse_index(bcv[0], bcv[1], bcv[2])][1]
-    } else {
+    if (ind != 0) {
         text += '<br>' + bible[verse_index(bcv[0], bcv[1], bcv[2])][0]
+    } else {
+        document.getElementById("two_version").checked = false
     }
     return text
 }
