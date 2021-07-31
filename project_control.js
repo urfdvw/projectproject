@@ -60,6 +60,7 @@ function display_verse(b, c, v) {
 function display_chapter() {
     // clear
     myNewWindow.document.body.innerHTML = '';
+    myNewWindow.document.title = si_book_name[b_cur]
     // get all verses in a chapter
     let verses = get_verses_chapter(b_cur, c_cur)
     // append verses to html
