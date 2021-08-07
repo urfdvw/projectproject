@@ -1,10 +1,29 @@
-# Goal
-This project is a practice of
-- Html
-- JavaScript (vanilla)
-- CSS
+# 圣经投影仪工具
+- 快速定位一节经文
+- 并投影在投影仪的屏幕上
 
-This project implemented a pure front-end web app that offer quick look up and projection of bible verses on the projector. It can be used in church sermons. 
+# 使用说明
 
-# Result
-Because the app is pure front-end, it is published and ready to use on [this GitHub link](https://urfdvw.github.io/projectproject/).
+这个应用是在网上的应用，请访问链接：https://urfdvw.github.io/projectproject/
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/RZhx7cPtVw0/0.jpg)](https://www.youtube.com/watch?v=RZhx7cPtVw0)
+[](https://stackoverflow.com/a/16079387/7037749)
+
+将投影窗口拖拽到投影仪对应的显示器，之后所有的操作都可以在控制界面完成。
+
+点击输入框进行输入。 输入的顺序可以是，书名（空格）章（空格）节，或者章（空格）节（空格）书名。 可以输入下列简写查找书名：
+
+```
+完整书名的汉语拼音全拼（如yuhanyishu）
+完整书名的汉语拼音首字母（如yhys）
+书名简写的汉语拼音全拼（如yueyi）
+英文书名（如1jhon）
+```
+        
+当出现联想的时候， 按【空格键】输入联想的第一个备选项， 或者按对应【数字键】输入其他备选项。 只要列表中出现了所需要的书名， 都可以按【空格键】或者【数字键】输入书名， 并不需要输入完整的书名或者简写。
+
+按键盘上【回车键】或者屏幕上的【投影】之后投影窗口会转到所需要的经节。 按键盘上【Shift键】或者屏幕上的【预览】可以预览所需要的经节。 按键盘上【Tab键】或者屏幕上的【记录】可将输入的经节存入历史记录。
+
+当光标在输入框中的时候，按键盘上的【上】、【PgUp】、【下】、【PgDown】可以滚动显示已经投影的经节。 另外不推荐用鼠标滚轴滚动投影窗口。
+
+点击历史记录按键可以回放之前的经节。 点击预览窗口中的经节可以投影被点击的经节。
