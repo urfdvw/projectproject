@@ -213,7 +213,6 @@ function findBooks(keyWord) {
 // ui //////////////////////////////////////////////////////////////////
 function init() {
     document.getElementById("input").value = ""
-    document.title = "圣经投影工具"
     updateInfo()
 }
 function updateInfo() {
