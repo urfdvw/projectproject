@@ -1,3 +1,7 @@
+新版本请移步至 https://github.com/urfdvw/bible-presenter
+
+---
+
 # 圣经投影仪工具
 - 快速定位一节经文
 - 并投影在投影仪的屏幕上
