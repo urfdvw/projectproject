@@ -4,6 +4,7 @@ function newWindow() {
     document.getElementById("start").style.display = "none"
     document.getElementById("UI").style.display = "block"
     newPage()
+    fetch('https://traffic-tracker-1059646239446.us-central1.run.app?name=projectproject')
 }
 
 // a handle of the new window that othe functions can operate
